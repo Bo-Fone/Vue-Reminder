@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import sweetalert from 'sweetalert'
+import Swal from 'sweetalert2'
 import Reminder from './components/Reminder'
 import CreateEntry from './components/CreateEntry'
 
@@ -46,7 +46,7 @@ export default {
   methods: {
     createEntry(entry) {
       this.entries.push(entry)
-      sweetalert('Success!', 'To-Do created!', 'success')
+      Swal.fire('Success!', 'To-Do created!', 'success')
     }
   }
 }

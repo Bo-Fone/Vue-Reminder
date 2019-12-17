@@ -14,7 +14,7 @@
 </template>
 
 <script type = "text/javascript" >
-import sweetalert from 'sweetalert'
+import Swal from 'sweetalert2'
 import Entry from './Entry'
 export default {
   props: ['entries'],
@@ -23,9 +23,22 @@ export default {
   },
   methods: {
     deleteEntry(entry) {
-      const entryIndex = this.entries.indexOf(entry)
-      this.entries.splice(entryIndex, 1)
-      sweetalert('Deleted!', 'Your To-Do has been deleted.', 'success')
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'This To-Do will be permanently deleted!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(result => {
+        if (result.value) {
+          const entryIndex = this.entries.indexOf(entry)
+          this.entries.splice(entryIndex, 1)
+          Swal.fire('Deleted!', 'Your To-Do has been deleted.', 'success')
+        }
+      })
+      // if (reason == undefined) {
+      // }
     },
     completeEntry(entry) {
       const entryIndex = this.entries.indexOf(entry)
